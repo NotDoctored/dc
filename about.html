@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - NotDoctored</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <style>
+    /* Global resets */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      cursor: none;
+    }
+    
+    body {
+      background: #0f0f0f;
+      color: #fff;
+      font-family: "Monument Extended", sans-serif;
+      /* Disable scrolling */
+      overflow: hidden;
+      position: relative;
+      overscroll-behavior: none;
+    }
+    
+    /* Custom Cursor */
+    .cursor {
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      mix-blend-mode: difference;
+      z-index: 999;
+      transition: transform 0.2s ease;
+    }
+    .cursor.expanded {
+      transform: scale(3);
+    }
+    
+    /* About Container */
+    .about-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+    }
+    
+    /* Back Button at the top centre */
+    .back-btn {
+      font-size: 1rem;
+      padding: 10px 20px;
+      border: 1px solid #fff;
+      background: none;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      transition: transform 0.3s ease, background 0.3s ease;
+      cursor: none;
+    }
+    .back-btn:hover,
+    .back-btn:focus {
+      background: #fff;
+      color: #0f0f0f;
+      transform: scale(1.05);
+    }
+    
+    .about-heading {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      /* Reduced gap between heading and paragraph */
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    
+    .about-text {
+      max-width: 800px;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      opacity: 0;
+      transform: translateY(50px);
+      margin-bottom: 40px;
+      /* Left-align paragraph text */
+      text-align: left;
+    }
+    
+    .skills-list {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      opacity: 0;
+      transform: translateY(50px);
+      padding: 0;
+    }
+    .skills-list li {
+      font-size: 1rem;
+      padding: 10px 15px;
+      border: 1px solid #fff;
+      border-radius: 5px;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .skills-list li:hover,
+    .skills-list li:focus {
+      background: #fff;
+      color: #0f0f0f;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor"></div>
+  
+  <div class="about-container">
+    <button class="back-btn" onclick="window.location.href='index.html'" tabindex="0">Back</button>
+    <h1 class="about-heading">About NotDoctored</h1>
+    <p class="about-text">
+      NotDoctored is a coder, web developer, and computing enthusiast with years of experience crafting elegant digital solutions.<br><br>
+    </p>
+    <ul class="skills-list">
+      <li>Code Artisan</li>
+      <li>Web Dev Guru</li>
+      <li>UI/UX Innovator</li>
+      <li>Tech Enthusiast</li>
+    </ul>
+  </div>
+  
+  <script>
+    // Custom Cursor
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    
+    // Expand custom cursor on hover for interactive elements
+    const hoverElements = document.querySelectorAll('.back-btn, .skills-list li');
+    hoverElements.forEach(element => {
+      element.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
+      element.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+      element.addEventListener('mousedown', () => cursor.classList.remove('expanded'));
+    });
+    
+    // GSAP Animations
+    gsap.to('.back-btn', {
+      opacity: 1,
+      y: 0,
+      duration: 1.2,
+      ease: 'power4.out',
+      delay: 0.3
+    });
+    gsap.to('.about-heading', {
+      opacity: 1,
+      y: 0,
+      duration: 1.5,
+      ease: 'power4.out',
+      delay: 0.5
+    });
+    gsap.to('.about-text', {
+      opacity: 1,
+      y: 0,
+      duration: 1.5,
+      ease: 'power4.out',
+      delay: 0.7
+    });
+    gsap.to('.skills-list li', {
+      opacity: 1,
+      y: 0,
+      duration: 1.5,
+      ease: 'power4.out',
+      stagger: 0.2,
+      delay: 0.9
+    });
+  </script>
+</body>
+</html>
